@@ -31,7 +31,7 @@ pipeline {
                         -Dsonar.projectKey=cargo-tracker \\
                         -Dsonar.projectName="Cargo Tracker" \\
                         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \\
-                        -Dsonar.host.url=http://localhost:9000 \\
+                        -Dsonar.host.url=http://host.docker.internal:9000 \\
                         -Dsonar.token=${SONAR_TOKEN}
                     """
                 }
