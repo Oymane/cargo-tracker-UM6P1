@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build & Test with Coverage') {
             steps {
-                bat 'mvn clean verify'
+                sh 'mvn clean verify'
             }
         }
 
@@ -25,13 +25,13 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SonarQube Local') {
-                    bat """
-                        mvn sonar:sonar ^
-                        -Dsonar.projectKey=cargo-tracker ^
-                        -Dsonar.projectName="Cargo Tracker" ^
-                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml ^
-                        -Dsonar.host.url=http://localhost:9000 ^
-                        -Dsonar.token=%SONAR_TOKEN%
+                    sh """
+                        mvn sonar:sonar \\
+                        -Dsonar.projectKey=cargo-tracker \\
+                        -Dsonar.projectName="Cargo Tracker" \\
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \\
+                        -Dsonar.host.url=http://localhost:9000 \\
+                        -Dsonar.token=${SONAR_TOKEN}
                     """
                 }
             }
