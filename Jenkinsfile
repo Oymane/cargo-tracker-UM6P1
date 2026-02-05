@@ -15,7 +15,8 @@ pipeline {
 
         stage('Build & Test with Coverage') {
             steps {
-                sh 'mvn clean verify'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean verify'
             }
         }
 
@@ -26,7 +27,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube Local') {
                     sh """
-                        mvn sonar:sonar \\
+                        ./mvnw sonar:sonar \\
                         -Dsonar.projectKey=cargo-tracker \\
                         -Dsonar.projectName="Cargo Tracker" \\
                         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \\
